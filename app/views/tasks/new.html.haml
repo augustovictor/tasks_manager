@@ -1,0 +1,8 @@
+%h1= link_to @project.name, project_path(@project)
+
+%br
+
+%h3 New task
+
+
+= render partial: 'form', object: @task

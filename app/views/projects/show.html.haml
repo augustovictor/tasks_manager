@@ -1,0 +1,48 @@
+%h1 #{@project.name}
+
+%p
+  %b.label.label-important #{@project.tasks.to_do.count} to do
+
+  %b.label.label-success #{@project.tasks.done.count} done
+
+%h3 Owner: #{link_to @project.owner_name, ''}
+
+%br
+
+%p
+  %button.btn.btn-primary.new_task_btn
+    %i.icon-file
+    New task
+  .new_task_container
+    = render partial: 'task_form'
+%br.c_both
+
+- unless @project.tasks.empty?
+  %h3 To do tasks ( #{@project.tasks.to_do.count} )
+  - unless @project.tasks.to_do.empty?
+    %button.btn.btn-mini.expand_all_btn{:"data-toggle" => 'button'}
+      %i.icon-resize-full
+      Expand all
+    %p
+    = render :partial => 'task', collection: @project.tasks.to_do
+  - else
+    %i No to do tasks yet.
+
+  %br
+  %hr
+  %br
+
+  %h3 Done tasks ( #{@project.tasks.done.count} )
+  - unless @project.tasks.done.empty?
+    %button.btn.btn-mini.expand_all_btn{:"data-toggle" => 'button'}
+      %i.icon-resize-full
+      Expand all
+    %p
+    = render partial: 'task', collection: @project.tasks.done
+
+  - else
+    %i No done tasks yet.
+
+- else
+  %i
+    There is no tasks yet.

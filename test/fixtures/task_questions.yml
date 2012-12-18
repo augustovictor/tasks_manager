@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type_questioning: MyString
+  message: MyText
+  task: 
+
+two:
+  type_questioning: MyString
+  message: MyText
+  task: 

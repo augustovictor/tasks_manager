@@ -1,0 +1,34 @@
+%h1 Tasks
+
+%br
+
+%p
+  / = link_to content_tag(:i, '', class: 'icon-book') +  " New task", new_task_path, class: 'btn btn-primary'
+
+
+- unless @tasks.empty?
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          %b Task
+        %th
+          %b Priority
+        %th
+          %b Created at
+        %th
+          %b Deadline
+        %th
+          %b Description
+    %tbody
+    - @tasks.each do |task|
+      %tr
+        %td.span3= task.name
+        %td.span1= task.priority
+        %td.span3= task.created_at.strftime("%d/%m/%Y")
+        %td.span3= task.deadline.strftime("%d/%m/%Y")
+        %td= task.description
+
+- else
+  %i
+    There is no tasks yet.

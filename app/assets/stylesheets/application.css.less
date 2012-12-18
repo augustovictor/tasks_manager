@@ -1,0 +1,288 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+
+@darkblue: #143352;
+@priority_color_one: green;
+@priority_color_two: orange;
+@priority_color_three: red;
+
+.rounded-corners (@radius: 3px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.box-shadow-style (@shadow: 2px 2px 3px lightgray) {
+  box-shadow: @shadow;
+}
+
+.box-shadow {
+  .box-shadow-style;
+}
+
+.transition (@transition: 0.3s) {
+  -webkit-transition: @transition;
+  -moz-transition: @transition;
+  -o-transition: @transition;
+}
+
+.color_white {
+  color: white;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.font_10 {
+  font-size: 10px;
+}
+
+.font_12 {
+  font-size: 12px;
+}
+
+.font_13 {
+  font-size: 14px;
+}
+
+.hr_h {
+  border: none;
+  border-top: 1px solid #bcbcbc;
+  border-bottom: 1px solid white;
+}
+
+.hr_v {
+  border: none;
+  border-left: 1px solid #bcbcbc;
+  border-right: 1px solid white;
+  display: inline;
+}
+
+.c_both {
+  clear: both;
+}
+
+.hr_v_small {
+  height: 20px;
+  margin: 0 10px;
+}
+
+.hr_v_med {
+  height: 100px;
+  margin: 0 10px;
+}
+
+.new_task_container {
+  .rounded-corners;
+  background: #F9F9F9;
+  border: 1px dashed #BDBDBD;
+  float: left;
+  padding: 10px;
+}
+
+.border-priority (@radius-border-priority: 3px) {
+  border-bottom-left-radius: @radius-border-priority;
+  border-top-left-radius: @radius-border-priority;
+  border-left: 10px;
+  border-left-style: solid;
+}
+
+/*Green*/
+.priority_one {
+  .border-priority;
+  border-color: #349200;
+}
+
+/*Orange*/
+.priority_two {
+  .border-priority;
+  border-color: #ff7200;
+}
+
+/*Red*/
+.priority_three {
+  .border-priority;
+  border-color: #d10000;
+}
+
+.p_one, .p_two, .p_three {
+  float: left;
+  height: 8px;
+  width: 22px;
+}
+
+.p_one {
+  background: @priority_color_one;
+}
+
+.p_two {
+  background: @priority_color_two;
+}
+
+.p_three {
+  background: @priority_color_three;
+}
+
+.task_container_expanded {
+  margin-bottom: 40px !important;
+}
+
+.task_container {
+  .rounded-corners;
+  background: #F9F9F9;
+  /*box-shadow: 1px 0px 6px #c1c1c1;*/
+  height: 143px;
+  margin: 2px 0 2px 30px;
+  width: 700px;
+
+  &:hover {
+      background: whitesmoke;
+  }
+
+  .task_header {
+    padding: 6px;
+
+    .id_tag {
+      color: #444444;
+      float: left;
+      font: normal 17px Arial, Helvetica, sans-serif;
+
+      .done_task_checkbox {
+        margin-top: 1px;
+      }
+
+    }
+
+    .top_task_info {
+      float: right;
+    }
+
+    .expand_task_btn {
+      .rounded-corners;
+      float: right;
+      margin-top: -21px;
+      padding: 3px 10px;
+      .transition;
+
+      &:hover {
+        background: #F9F9F9;
+        cursor: pointer;
+        .transition;
+
+      }
+    }
+
+    .task_name {
+      margin-top: 5px;
+    }
+
+    .config_btns {
+      float: right;
+      margin: 2px 2px 0 0;
+    }
+
+    .priority_deadline {
+      margin-top: 3px;
+    }
+
+    .assigned_to {
+      color: @darkblue;
+    }
+
+    .deadline {
+      float: right;
+      margin-right: 5px;
+    }
+
+  }
+
+  .task_content_container {
+    .rounded-corners;
+    border:1px dashed #bdbdbd;
+    height: 111px;
+
+    .task_content {
+      /*background: red;*/
+      color: @darkblue;
+      float: left;
+      height: 91%;
+      margin: 5px 0 0 0;
+      padding: 0 3px;
+      width: 99%;
+
+      .task_desc_txt {
+        margin-left: 15px;
+      }
+
+      .btn_ask_for {
+        margin: 0 0 0 0px;
+
+        .description_font {
+          color: black;
+          font-weight: bold;
+        }
+
+      }
+
+      .description_container {
+        height: 83px;
+        margin-bottom: 0;
+        padding-left: 12px;
+      }
+
+    }
+  }
+
+  .footer {
+    border-bottom: 1px dotted lightgray;
+    color: @darkblue;
+    float: left;
+    margin: 6px 0 7px 0;
+    padding: 5px;
+    width: 99%;
+
+
+  }
+
+  .btns_container {
+    float: right;
+  }
+
+}
+
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #999;
+  cursor: default;
+  li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 0;
+    a {
+      color: #000;
+      display: block;
+      padding: 3px;
+    }
+    a.ui-state-hover, a.ui-state-active {
+      background-color: #FFFCB2;
+    }
+  }
+}

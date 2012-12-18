@@ -1,0 +1,50 @@
+%h1= link_to @project.name, project_path(@project)
+
+%br
+
+%p
+  %b Task:
+  %br
+  = @task.name
+%p
+  %b Priority:
+  %br
+  #{@task.priority}
+%p
+  %b Created at:
+  %br
+  #{@task.created_at.strftime("%m/%d/%Y")}
+%p
+  %b Deadline:
+  %br
+  #{@task.deadline.strftime("%m/%d/%Y")}
+%p
+  %b Description:
+  %br
+  #{@task.description}
+
+%p
+  = link_to content_tag(:i, '', class: 'icon-pencil') +  " Edit", edit_project_task_path(@project), class: 'btn btn-mini'
+
+%h3 Questionings: #{@task.task_questions.count}
+- unless @task.task_questions.empty?
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          %b Actions
+        %th
+          %b Asking for
+        %th
+          %b Message
+        %th
+          %b Created at
+    %tbody
+    - @task.task_questions.each do |question|
+      %tr
+        %td.span1= link_to "solved", project_task_task_question_path(@project, @task, question), method: :delete, confirm: 'The questioning  is going to be deleted. Would you like do proceed?', class: 'btn btn-mini btn-success'
+        %td= question.type_questioning
+        %td= question.message
+        %td.span2= question.created_at.strftime("%m/%d/%Y")
+  - else
+    %i No questionings for this task yet.

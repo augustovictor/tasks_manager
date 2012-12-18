@@ -1,0 +1,44 @@
+.row
+  .task_container
+    .task_header{class: priority_style(task.priority)}
+      .id_tag
+        = check_box('task', 'done', :'onclick' => "document.location.href='#{request.url}/tasks/#{task.id}/reopen_task'", class: 'done_task_checkbox', checked: true) if task.done
+
+        = check_box('task', 'done', :'onclick' => "document.location.href='#{request.url}/tasks/#{task.id}/done_task'", class: 'done_task_checkbox') unless task.done
+        %span.font_10 #
+        = task.id
+      .hr_v.hr_v_small
+      = link_to task.name, project_task_path(@project, task)
+      .top_task_info
+        %i.icon-user
+        //Assignments
+        = link_to name_abbreviation(task.users.first.name), ''
+        .hr_v.hr_v_small
+        %i.icon-fire
+        = task.deadline.strftime("%m/%d/%Y")
+        .hr_v.hr_v_small
+        .expand_task_btn
+          %i.icon-resize-full
+    .task_content_container
+      .task_content
+        %b.task_desc_txt Description:
+        %br
+        %p.description_container
+          = task.description if task.description?
+          - unless task.description?
+            %i No description.
+      .footer
+        %span.font_12
+          %b Created at:
+          = task.created_at.strftime("%m/%d/%Y")
+          .hr_v.hr_v_small
+          //Who created the task
+          %b By:
+          = link_to name_abbreviation(task.owner_name), ''
+          .hr_v.hr_v_small
+          %b
+            Time remaining:
+          15 mins
+        .btns_container
+          = link_to content_tag(:i, '', class: 'icon-pencil') + " edit", edit_project_task_path(@project, task), class: 'btn btn-mini'
+          = link_to content_tag(:i, '', class: 'icon-trash') + ' delete', project_task_path(@project, task), method: :delete, class: 'btn btn-mini btn-danger', confirm: "The task \"#{task.name}\" is going to be deleted. Would you like do proceed?"
