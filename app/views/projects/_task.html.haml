@@ -8,11 +8,12 @@
         %span.font_10 #
         = task.id
       .hr_v.hr_v_small
-      = link_to task.name, project_task_path(@project, task)
+      = link_to task.name.capitalize, project_task_path(@project, task)
       .top_task_info
         %i.icon-user
         //Assignments
-        = link_to name_abbreviation(task.users.first.name), ''
+        - task.users.each do |user|
+          = link_to name_abbreviation(user.name), ''
         .hr_v.hr_v_small
         %i.icon-fire
         = task.deadline.strftime("%m/%d/%Y")

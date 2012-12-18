@@ -1,3 +1,8 @@
 .assignment_field
-  = f.input :user_id, collection: User.all, include_blank: false, label: false, input_html: { class: 'span4'}
-  = link_to_remove_association "Remove", f
+  %h3 Assignments
+  = hidden_field_tag "task[user_ids][]", nil
+  - User.all.each do |user|
+    .checkbox
+      = check_box_tag "task[user_ids][]", user.id, @task.user_ids.include?(user.id), id: dom_id(user)
+      = label_tag dom_id(user), user.name
+    %br
