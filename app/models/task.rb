@@ -17,7 +17,7 @@ class Task < ActiveRecord::Base
 
   accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, :user_ids, presence: true
+  validates :name, :users, :priority, presence: true
   validates :name, uniqueness: true
 
 

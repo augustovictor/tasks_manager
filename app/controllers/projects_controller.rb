@@ -57,12 +57,17 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     @task = @project.tasks.new(params[:task])
     @task.user_id = current_user
-    # assignment = @task.assignments.new(params[:assignments])
 
-    if @task.save
-      redirect_to(@project, notice: 'Task created successfully.')
+    unless @task.users.empty?
+
+      if @task.save
+        redirect_to(@project, notice: 'Task created successfully.')
+      else
+        redirect_to(@project, error: 'Something went wrong while creating the task.')
+      end
+
     else
-      redirect_to(@project, error: 'Something went wrong while creating the task.')
+      redirect_to(:back, alert: 'The task should be assign to someone.')
     end
   end
 

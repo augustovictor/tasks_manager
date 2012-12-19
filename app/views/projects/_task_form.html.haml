@@ -1,20 +1,6 @@
 = simple_form_for(@project.tasks, url: project_add_task_path(@project)) do |f|
   = f.error_notification
-  = f.input :name, input_html: {class: 'span4'} #, data: { autocomplete_source: Project.order(:name).map(&:name)}
-  = f.input :description, input_html: {rows: 4, class: 'span4'}
-  = f.input :priority, collection: 1..3, prompt: false, input_html: { class: 'span1' }
-  .priority_levels
-    .p_one
-    .p_two
-    .p_three
-  %p
-  = f.input :deadline, input_html: { class: 'span1' }
-  / = f.input collection: User.all
-  %br
-
-  #assignments
-    = render 'assignment_fields'
-  / = link_to_add_association "Add assignment", f, :assigmnents
+  = render 'tasks/task_fields', f: f
   %br
   = f.submit class: 'btn btn-primary'
   %span.btn.cancel_new_task Cancel

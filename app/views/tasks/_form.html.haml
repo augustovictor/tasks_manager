@@ -1,12 +1,7 @@
 = simple_form_for([@project, @task]) do |f|
-
+  = f.error_notification
   .form-inputs
-
-    = f.input :name, input_html: {class: 'span4'}
-    = f.input :description, input_html: {rows: 4, class: 'span4'}
-    = f.input :priority, collection: 1..3, prompt: false, input_html: { class: 'span1' }
-    = f.input :deadline, input_html: { class: 'span1' }
-    = render 'projects/assignment_fields'
+    = render 'task_fields', f: f
     %br
     = f.submit class: 'btn btn-primary'
     = link_to 'Cancel', :back, class: 'btn'
