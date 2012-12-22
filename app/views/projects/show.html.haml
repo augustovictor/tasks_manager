@@ -5,8 +5,12 @@
 
   %b.label.label-success #{@project.tasks.done.count} done
 
-%h3 Owner: #{link_to @project.owner_name, ''}
+%h3 Owner: #{link_to @project.owner_name, user_profile_path(@project.owner)}
 
+%br
+%h3 Participants:
+- @project.users do |user|
+  = user.name
 %br
 
 %p

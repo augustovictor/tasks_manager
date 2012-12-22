@@ -4,6 +4,12 @@ TasksManager::Application.routes.draw do
 
   root to: "projects#index"
 
+  match '/users(/:id)' => 'users#show', as: :user_profile
+
+  # resources :users, only: [:show] do
+  #   get 'user_profile'
+  # end
+
   resources :projects do
     post 'add_task'
     resources :tasks, except: [:index] do

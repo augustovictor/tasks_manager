@@ -1,0 +1,8 @@
+%h1= @user.name
+= link_to 'Invite to project', '', class: 'btn btn-primary'
+
+%h3 Projetos (#{@user.projects.count})
+
+%ul
+  - @user.projects.each do |project|
+    %li= project.name

@@ -31,3 +31,9 @@ jQuery ->
   #Autocomplete task name
   $('#task_name').autocomplete
     source: $('#task_name').data('autocomplete-source')
+
+  $('.assignments input').click ->
+    if $('.assignments input:checked').size() != 0
+      $('.submit-task-from-project-page').removeAttr('disabled')
+    if $('.assignments input:checked').size() == 0
+      $('.submit-task-from-project-page').attr('disabled', 'disabled')

@@ -35,7 +35,6 @@ class TasksController < ApplicationController
 
 
   def destroy
-    current_user.revoke('task_owner', @task)
     @task.destroy
     redirect_to(:back, notice: 'The task was removed successfully.')
   end
@@ -73,6 +72,7 @@ class TasksController < ApplicationController
   #   @questioning.destroy
   #   redirect_to(:back, notice: 'The questioning was removed successfully.')
   # end
+  private
 
   def get_project
     @project = Project.find(params[:project_id])

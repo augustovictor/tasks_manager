@@ -4,5 +4,6 @@
 = f.input :deadline, input_html: { class: 'span1' }
 %h3 *Assignments
 %br
-.checkbox
-  = f.collection_check_boxes :user_ids, User.all, :id, :name, item_wrapper_class: 'inline'
+.assignments
+  .checkbox
+    = f.collection_check_boxes :user_ids, User.all, :id, :name, item_wrapper_class: 'inline'

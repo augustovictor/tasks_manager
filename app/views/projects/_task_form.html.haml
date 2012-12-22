@@ -2,5 +2,5 @@
   = f.error_notification
   = render 'tasks/task_fields', f: f
   %br
-  = f.submit class: 'btn btn-primary'
+  = f.submit class: 'submit-task-from-project-page btn btn-primary', disabled: true
   %span.btn.cancel_new_task Cancel

@@ -13,7 +13,7 @@
         %i.icon-user
         //Assignments
         - task.users.each do |user|
-          = link_to name_abbreviation(user.name), ''
+          = link_to name_abbreviation(user.name), user_profile_path(user)
         .hr_v.hr_v_small
         %i.icon-fire
         = task.deadline.strftime("%m/%d/%Y")

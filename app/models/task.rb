@@ -1,7 +1,5 @@
 class Task < ActiveRecord::Base
 
-  resourcify
-
   attr_accessible :deadline, :description, :done, :name, :priority, :assignments_attributes, :user_ids
 
   belongs_to :project

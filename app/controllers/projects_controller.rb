@@ -23,8 +23,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
-    @project.user_id = current_user
+    @user = current_user
+    @project = @user.projects.new(params[:project])
+    @project.user_id = @user
 
     if @project.save
       redirect_to(projects_path, notice: 'Project created successfully.')
@@ -45,7 +46,6 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id])
-    current_user.revoke('project_owner', @project)
     @project.destroy
     redirect_to(projects_path, notice: "Project removed successfully.")
   end

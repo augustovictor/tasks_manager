@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-  rolify
-
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   # Include default devise modules. Others available are:
@@ -13,6 +11,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :title, :body
 
+  has_many :participants
+  has_many :projects, through: :participants
   has_many :assignments
   has_many :tasks, through: :assignments
 
