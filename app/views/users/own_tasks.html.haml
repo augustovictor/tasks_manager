@@ -1,0 +1,18 @@
+%h3 Tasks to do ( #{ @user.tasks.to_do.count } )
+- if @tasks.empty?
+  %i No tasks
+- else
+  %table
+    %thead
+      %tr
+        %th
+          Task
+        %th
+          Project
+    %tbody
+      - @tasks.to_do.limit(10).each do |task|
+        %tr
+          %td
+            = task.name
+          %td
+            = task.project.name

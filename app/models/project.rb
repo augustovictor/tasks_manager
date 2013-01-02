@@ -1,5 +1,7 @@
 class Project < ActiveRecord::Base
 
+  before_save :titleize_name
+
   attr_accessible :description, :name
 
   validates :name, presence: true
@@ -8,9 +10,19 @@ class Project < ActiveRecord::Base
   delegate :email, :name, to: :owner, prefix: true
 
   has_many :tasks, dependent: :destroy
+  # has_many :participants
   has_many :participants
-  has_many :users, through: :participants
+  has_and_belongs_to_many :users
 
-  default_scope order('created_at DESC')
+  # default_scope order('created_at DESC')
+  scope :recent, order('created_at desc')
+
+  def participant?(user)
+    self.users.include?(user)
+  end
+
+  def titleize_name
+    self.name = name.titleize
+  end
 
 end

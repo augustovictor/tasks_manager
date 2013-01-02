@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121214171444) do
+ActiveRecord::Schema.define(:version => 20130102120556) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,23 @@ ActiveRecord::Schema.define(:version => 20121214171444) do
   add_index "assignments", ["task_id"], :name => "index_assignments_on_task_id"
   add_index "assignments", ["user_id"], :name => "index_assignments_on_user_id"
 
+  create_table "linkings", :force => true do |t|
+    t.integer  "linking_id"
+    t.integer  "linked_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "project_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "project_users", ["project_id"], :name => "index_project_users_on_project_id"
+  add_index "project_users", ["user_id"], :name => "index_project_users_on_user_id"
+
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -30,6 +47,16 @@ ActiveRecord::Schema.define(:version => 20121214171444) do
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
   end
+
+  create_table "projects_users", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "projects_users", ["project_id"], :name => "index_projects_users_on_project_id"
+  add_index "projects_users", ["user_id"], :name => "index_projects_users_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -62,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20121214171444) do
     t.datetime "updated_at",                     :null => false
     t.integer  "project_id"
     t.integer  "user_id"
+    t.integer  "linked_task"
   end
 
   create_table "users", :force => true do |t|
@@ -78,10 +106,21 @@ ActiveRecord::Schema.define(:version => 20121214171444) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.string   "login_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_projects", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "users_projects", ["project_id"], :name => "index_users_projects_on_project_id"
+  add_index "users_projects", ["user_id"], :name => "index_users_projects_on_user_id"
 
   create_table "users_roles", :id => false, :force => true do |t|
     t.integer "user_id"

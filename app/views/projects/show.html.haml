@@ -8,9 +8,11 @@
 %h3 Owner: #{link_to @project.owner_name, user_profile_path(@project.owner)}
 
 %br
-%h3 Participants:
-- @project.users do |user|
-  = user.name
+%h3 Participants ( #{@project.users.count} ):
+- @project.users.each do |user|
+  = link_to user.name, user_profile_path(user)
+  = link_to 'remove', project_remove_participation_path(@project, user: user), class: 'btn btn-mini btn-danger', confirm: "Remove #{user.name} from project?" if @project.owner != user && @project.owner == current_user
+  %p
 %br
 
 %p

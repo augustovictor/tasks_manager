@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %title TasksManager
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application",  "less", "defaults", "cocoon"
+    = csrf_meta_tags
+  %body
+    = render 'layouts/navigation'
+    .container
+      .content
+        = render partial: 'layouts/messages'
+        .row
+          - if user_signed_in?
+            .span2
+              = render 'layouts/sidebar_menu'
+          .span8.content_container
+            = yield
+          - if user_signed_in?
+            .span2
+              = render 'layouts/sidebar_notifications'

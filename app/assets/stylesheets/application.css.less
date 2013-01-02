@@ -86,6 +86,23 @@
   margin: 0 10px;
 }
 
+.content_container {
+  border-right: 1px dashed #E0E0E0;
+  border-left: 1px dashed #E0E0E0;
+  margin-left: 10px !important;
+  padding-left: 10px;
+  padding-right: 12px;
+  width: 765px !important;
+}
+
+.no_list_style {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style-type: none;
+  }
+}
+
 .new_task_container {
   .rounded-corners;
   background: #F9F9F9;
@@ -129,6 +146,10 @@
   background: @priority_color_one;
 }
 
+.align-center {
+  text-align: center;
+}
+
 .p_two {
   background: @priority_color_two;
 }
@@ -141,19 +162,59 @@
   margin-bottom: 40px !important;
 }
 
+.fixed_sidebar {
+  position: fixed;
+
+  .side_bar_menu {
+
+    margin-top: 10px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style-type: none;
+
+        a {
+          color: #353535;
+          float: left;
+          width: 100%;
+
+          &:hover {
+            background: #EBEBEB;
+            text-decoration: none;
+          }
+        }
+
+      }
+    }
+
+  }
+
+}
+
+.user_profile_img {
+  width: 135px;
+}
+
+.invite_user_btn {
+  margin-top: 57px;
+}
+
 .task_container {
   .rounded-corners;
   background: #F9F9F9;
   /*box-shadow: 1px 0px 6px #c1c1c1;*/
   height: 143px;
   margin: 2px 0 2px 30px;
-  width: 700px;
+  width: 755px;
 
   &:hover {
       background: whitesmoke;
   }
 
   .task_header {
+    height: 20px;
     padding: 6px;
 
     .id_tag {
@@ -165,6 +226,15 @@
         margin-top: 1px;
       }
 
+
+    }
+
+    .task_name_container {
+      float: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 410px;
     }
 
     .top_task_info {
@@ -174,7 +244,7 @@
     .expand_task_btn {
       .rounded-corners;
       float: right;
-      margin-top: -21px;
+      margin-top: -3px;
       padding: 3px 10px;
       .transition;
 
@@ -210,6 +280,11 @@
 
   }
 
+  ::-webkit-scrollbar {
+    width: 0em;
+    height: 0em
+  }
+
   .task_content_container {
     .rounded-corners;
     border:1px dashed #bdbdbd;
@@ -223,6 +298,7 @@
       margin: 5px 0 0 0;
       padding: 0 3px;
       width: 99%;
+      overflow-y: auto;
 
       .task_desc_txt {
         margin-left: 15px;

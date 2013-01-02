@@ -3,6 +3,7 @@ jQuery ->
   $(".tooltip").tooltip()
   $("a[rel=tooltip]").tooltip()
 
+  $('.popover-description').popover()
 
   # Hide contents
   $('.task_content_container').hide()
@@ -37,3 +38,5 @@ jQuery ->
       $('.submit-task-from-project-page').removeAttr('disabled')
     if $('.assignments input:checked').size() == 0
       $('.submit-task-from-project-page').attr('disabled', 'disabled')
+
+  $("#task_linked_task").value('asd')

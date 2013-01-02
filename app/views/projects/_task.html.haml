@@ -1,4 +1,6 @@
 .row
+  / %button{type: 'button', class: 'btn btn-mini btn-primary pull-left'}
+  / link task
   .task_container
     .task_header{class: priority_style(task.priority)}
       .id_tag
@@ -7,25 +9,32 @@
         = check_box('task', 'done', :'onclick' => "document.location.href='#{request.url}/tasks/#{task.id}/done_task'", class: 'done_task_checkbox') unless task.done
         %span.font_10 #
         = task.id
-      .hr_v.hr_v_small
-      = link_to task.name.capitalize, project_task_path(@project, task)
+      .task_name_container
+        .hr_v.hr_v_small
+        - if task.linked_task?
+          %small.popover-description{:"data-title" => task.linked_task_name, :"data-content" => task.linked_task_description, :"data-placement" => 'bottom'}
+            = link_to "##{task.linked_task}", project_task_path(@project, task.linked_task)
+          %i.icon-arrow-left
+        = link_to task.name.capitalize, project_task_path(@project, task)
       .top_task_info
         %i.icon-user
         //Assignments
         - task.users.each do |user|
           = link_to name_abbreviation(user.name), user_profile_path(user)
         .hr_v.hr_v_small
-        %i.icon-fire
-        = task.deadline.strftime("%m/%d/%Y")
+        %i.icon-calendar
+        %span{class: delayed_task_style(task)}
+          = task.deadline.strftime("%m/%d/%Y")
         .hr_v.hr_v_small
         .expand_task_btn
           %i.icon-resize-full
+        %br.c_both
     .task_content_container
       .task_content
         %b.task_desc_txt Description:
         %br
         %p.description_container
-          = task.description if task.description?
+          = break_lines(task.description) if task.description?
           - unless task.description?
             %i No description.
       .footer
@@ -37,9 +46,8 @@
           %b By:
           = link_to name_abbreviation(task.owner_name), ''
           .hr_v.hr_v_small
-          %b
-            Time remaining:
-          15 mins
+          %b=time_remaining_or_delayed_text(task)
+          = time_remaining(task)
         .btns_container
           = link_to content_tag(:i, '', class: 'icon-pencil') + " edit", edit_project_task_path(@project, task), class: 'btn btn-mini'
           = link_to content_tag(:i, '', class: 'icon-trash') + ' delete', project_task_path(@project, task), method: :delete, class: 'btn btn-mini btn-danger', confirm: "The task \"#{task.name}\" is going to be deleted. Would you like do proceed?"

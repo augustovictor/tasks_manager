@@ -1,11 +1,14 @@
 class ProjectsController < ApplicationController
 
+  # before_filter :get_project, except: [:new]
+
   def index
-    @projects = Project.all
+    @projects = Project.recent
   end
 
   def show
     @project = Project.find(params[:id])
+    # @task = @project.tasks.new(task: Task.new)
     @task = @project.tasks.new(params[:task])
     1.times do
       @task = @project.tasks.build
@@ -14,7 +17,8 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+    @current_user = current_user
+    @project = @current_user.projects.new
   end
 
   def edit
@@ -24,11 +28,11 @@ class ProjectsController < ApplicationController
 
   def create
     @user = current_user
-    @project = @user.projects.new(params[:project])
+    @project = @user.projects.create(params[:project])
     @project.user_id = @user
 
     if @project.save
-      redirect_to(projects_path, notice: 'Project created successfully.')
+      redirect_to(:back, notice: 'Project created successfully.')
     else
       redirect_to(:back, error: 'Something went wrong while creating the project.')
     end
@@ -50,6 +54,12 @@ class ProjectsController < ApplicationController
     redirect_to(projects_path, notice: "Project removed successfully.")
   end
 
+  def remove_participation
+    @project = Project.find(params[:project_id])
+    user = User.find(params[:user])
+    @project.users.delete(user)
+    redirect_to(:back, notice: 'User removed successfully.')
+  end
 
   #TASKS
 
@@ -69,6 +79,12 @@ class ProjectsController < ApplicationController
     else
       redirect_to(:back, alert: 'The task should be assign to someone.')
     end
+  end
+
+  private
+
+  def get_project
+    @project = current_user.projects.find(params[:id])
   end
 
 end

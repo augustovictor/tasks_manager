@@ -1,0 +1,16 @@
+%p
+.fixed_sidebar
+  %p.align-center
+    %b= link_to presenting_name(current_user.name), user_profile_url(current_user)
+  %br
+  = link_to image_tag('user.png', class: 'user_profile_img img-polaroid'), user_profile_url(current_user)
+
+  .side_bar_menu
+    %h3 Menu
+    %ul
+      %li
+        = link_to content_tag(:i, '', class: 'icon-user') + ' Profile', user_profile_url(current_user)
+      %li
+        = link_to content_tag(:i, '', class: 'icon-folder-open') +' Projects', own_projects_path(current_user)
+      %li
+        = link_to content_tag(:i, '', class: 'icon-th-list') + ' Tasks', own_tasks_path(current_user)

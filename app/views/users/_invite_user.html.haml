@@ -1,0 +1,23 @@
+= link_to 'Invite', "#modal-invite-user-#{@user.id}", class: 'btn btn-primary', :"data-toggle" => "modal" #class: 'invite_user_btn'
+
+.modal.hide.fade{id: "modal-invite-user-#{@user.id}"}
+  = form_tag(invite_path(@user)) do
+    .modal-header
+      %button.close{:"data-dismiss" => 'modal', type: 'button'} x
+      %h3 Invite to which project?
+    .modal-body
+      %p
+        %strong
+          Projects
+        - if current_user.projects.empty?
+          %br
+          %i No projects.
+        - else
+          - current_user.projects.each do |project|
+            - if !project.participant?(@user)
+              .checkbox
+                = check_box_tag "project[#{project.id}][]", project.id, @user.projects.include?(project)
+                = label_tag project.name
+    .modal-footer
+      = submit_tag 'Send invitation', class: 'btn btn-primary'
+      %a.btn{"data-dismiss" => "modal", :href => "#"} Fechar

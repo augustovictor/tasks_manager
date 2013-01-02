@@ -1,9 +1,10 @@
 = f.input :name, input_html: {class: 'span4'}
 = f.input :description, input_html: {rows: 4, class: 'span4'}
-= f.input :priority, collection: 1..3, as: :radio_buttons, item_wrapper_class: 'inline'
+= f.input :priority, collection: [['Low', 1], ['Medium', 2], ['High', 3]], as: :radio_buttons, item_wrapper_class: 'inline'
 = f.input :deadline, input_html: { class: 'span1' }
+= f.input :linked_task, label: 'Associate with task', input_html: {:"placeholder" => 'task id', class: 'span1'}
 %h3 *Assignments
 %br
 .assignments
   .checkbox
-    = f.collection_check_boxes :user_ids, User.all, :id, :name, item_wrapper_class: 'inline'
+    = f.collection_check_boxes :user_ids, @project.users, :id, :name, item_wrapper_class: 'inline'

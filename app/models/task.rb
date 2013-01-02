@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
 
-  attr_accessible :deadline, :description, :done, :name, :priority, :assignments_attributes, :user_ids
+  attr_accessible :deadline, :description, :done, :name, :priority, :assignments_attributes, :user_ids, :linked_task
 
   belongs_to :project
   belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
@@ -26,4 +26,13 @@ class Task < ActiveRecord::Base
   def self.to_do
     where(done: false)
   end
+
+  def linked_task_description
+    Task.find_by_id(self.linked_task).description
+  end
+
+  def linked_task_name
+    Task.find_by_id(self.linked_task).name
+  end
+
 end

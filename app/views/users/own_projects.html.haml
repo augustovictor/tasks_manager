@@ -1,0 +1,14 @@
+%h1= @user.name
+
+%h3 Projects ( #{current_user.projects.count} ) #{ link_to content_tag(:i, '', class: 'icon-plus-sign') + ' new', new_project_path, class: 'btn btn-mini btn-primary' }
+
+- if @projects.empty?
+  %i No projects
+- else
+  %ul.no_list_style
+    - @projects.recent.each do |project|
+      %li
+        = link_to project.name, project_path(project)
+        - if @user.own_project?(project)
+          %b (Owner)
+          = link_to content_tag(:i, '', class: 'icon-trash') + ' del', project_path(project), method: :delete, class: 'btn btn-mini btn-danger', confirm: "The project \"#{project.name}\" is going to be deleted. Would you like do proceed?"

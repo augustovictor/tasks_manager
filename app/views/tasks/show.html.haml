@@ -1,11 +1,10 @@
-%h1= link_to @project.name, project_path(@project)
+%h1 Project #{link_to @project.name, project_path(@project)}
 
 %br
 
-%p
-  %b Task:
-  %br
-  = @task.name
+%h3 Task:
+= @task.name
+
 %p
   %b Priority:
   %br
