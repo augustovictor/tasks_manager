@@ -4,6 +4,10 @@ module ApplicationHelper
     text.gsub(/\n/, '<br>').html_safe
   end
 
+  def highlight_current_menu(menu)
+
+  end
+
   def name_abbreviation(name)
     arr = name.split(' ')
     short_name = ''

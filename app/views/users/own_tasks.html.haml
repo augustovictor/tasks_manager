@@ -2,17 +2,20 @@
 - if @tasks.empty?
   %i No tasks
 - else
-  %table
-    %thead
-      %tr
-        %th
-          Task
-        %th
-          Project
-    %tbody
-      - @tasks.to_do.limit(10).each do |task|
-        %tr
-          %td
-            = task.name
-          %td
-            = task.project.name
+/ %ul.no_list_style.hover_list
+/   - @tasks.to_do.limit(10).each do |task|
+/     %li
+/       = task.name
+/       \-
+/       = task.project.name
+
+%ul.no_list_style
+  %ul
+    - @projects.order_name.each do |project|
+      %hr
+      %li
+        %h3= link_to project.name, project_path(project)
+        %ul.hover_list
+          - project.tasks.to_do.each do |task|
+            %li
+              = link_to task.name, project_task_path(project, task)

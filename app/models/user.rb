@@ -19,12 +19,16 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :tasks, through: :assignments
 
-  def own_project?(project)
+  def project_member?(project)
     self.projects.include?(project)
   end
 
   def invitable_projects
     self.projects.where(user_id: self)
+  end
+
+  def project_invitation_notification
+    ProjectMailer.project_invitation(self).deliver
   end
 
 end

@@ -1,4 +1,9 @@
 %h1= @user.name.titleize
 
+%h3 Info
+%p
+  Email:
+  = @user.email
+
 = render 'invite_user' if @user != current_user
 

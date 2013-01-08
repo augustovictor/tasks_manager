@@ -27,12 +27,12 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @project = @user.projects.create(params[:project])
-    @project.user_id = @user
+    @project = Project.new(params[:project])
+    @project.owner = current_user
 
     if @project.save
-      redirect_to(:back, notice: 'Project created successfully.')
+      current_user.projects << @project
+      redirect_to(@project, notice: 'Project created successfully.')
     else
       redirect_to(:back, error: 'Something went wrong while creating the project.')
     end
@@ -51,7 +51,11 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to(projects_path, notice: "Project removed successfully.")
+    redirect_to(own_projects_path(current_user), notice: "Project removed successfully.")
+  end
+
+  rescue_from ActiveRecord::DeleteRestrictionError do
+    redirect_to(:back, alert: 'This project still has tasks.')
   end
 
   def remove_participation

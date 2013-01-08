@@ -5,10 +5,11 @@
 - if @projects.empty?
   %i No projects
 - else
-  %ul.no_list_style
-    - @projects.recent.each do |project|
+  %ul.no_list_style.hover_list
+    - @projects.order_name.each do |project|
       %li
+        %i.icon-book
         = link_to project.name, project_path(project)
-        - if @user.own_project?(project)
+        - if project.owner?(@user)
           %b (Owner)
           = link_to content_tag(:i, '', class: 'icon-trash') + ' del', project_path(project), method: :delete, class: 'btn btn-mini btn-danger', confirm: "The project \"#{project.name}\" is going to be deleted. Would you like do proceed?"
