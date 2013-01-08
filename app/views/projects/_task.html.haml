@@ -48,6 +48,12 @@
           .hr_v.hr_v_small
           %b=time_remaining_or_delayed_text(task)
           = time_remaining(task)
+          .hr_v.hr_v_small
+          - unless task.categories.empty?
+            %b= 'Category'.pluralize(task.categories.count) + ':'
+            - task.categories.each do |category|
+              %span.category_label.label.label-info
+                = category.name
         .btns_container
           = link_to content_tag(:i, '', class: 'icon-pencil') + " edit", edit_project_task_path(@project, task), class: 'btn btn-mini'
           = link_to content_tag(:i, '', class: 'icon-trash') + ' delete', project_task_path(@project, task), method: :delete, class: 'btn btn-mini btn-danger', confirm: "The task \"#{task.name}\" is going to be deleted. Would you like do proceed?"

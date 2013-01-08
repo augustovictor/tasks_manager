@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @project = current_user.projects.find(project_id)
       @user.projects << @project
     end
-    ProjectMailer.project_invitation(@user).deliver
+    # ProjectMailer.project_invitation(@user).deliver
     redirect_to :back, notice: 'User invited successfully.'
   end
 

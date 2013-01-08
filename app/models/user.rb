@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def project_invitation_notification
-    ProjectMailer.project_invitation(self).deliver
+    # ProjectMailer.project_invitation(self).deliver
   end
 
 end
