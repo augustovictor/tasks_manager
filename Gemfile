@@ -21,13 +21,7 @@ gem 'haml'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 
 #database
-group :development do
-  gem 'mysql2'
-end
-
-group :production do
-  gem 'sqlite3'
-end
+gem 'mysql2'
 
 #forms
 gem 'simple_form'
@@ -50,6 +44,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'activerecord-postgresql-adapter'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
