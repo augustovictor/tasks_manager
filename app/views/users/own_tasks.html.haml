@@ -12,10 +12,12 @@
 %ul.no_list_style
   %ul
     - @projects.order_name.each do |project|
-      %hr
       %li
-        %h3= link_to project.name, project_path(project)
-        %ul.hover_list
-          - project.tasks.to_do.each do |task|
-            %li
-              = link_to task.name, project_task_path(project, task)
+        .own_tasks_project_header
+          %h3= link_to project.name, project_path(project)
+        .own_tasks_container
+          %ul
+            - project.tasks.to_do.each do |task|
+              %li
+                = link_to task.name, project_task_path(project, task)
+      %hr

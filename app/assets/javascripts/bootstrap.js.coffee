@@ -39,4 +39,7 @@ jQuery ->
     if $('.assignments input:checked').size() == 0
       $('.submit-task-from-project-page').attr('disabled', 'disabled')
 
-  $("#task_linked_task").value('asd')
+  #$("#task_linked_task").value('asd')
+
+  $('.own_tasks_project_header').click ->
+    $(this).next('.own_tasks_container').slideToggle()
