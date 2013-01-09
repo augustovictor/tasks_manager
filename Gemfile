@@ -21,7 +21,13 @@ gem 'haml'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 
 #database
-gem 'mysql2'
+group :development do
+  gem 'mysql2'
+end
+
+group :production do
+  gem 'sqlite3'
+end
 
 #forms
 gem 'simple_form'
