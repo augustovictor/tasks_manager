@@ -12,7 +12,7 @@
       .task_name_container
         .hr_v.hr_v_small
         - if task.linked_task?
-          %small.popover-description{:"data-title" => task.linked_task_name, :"data-content" => task.linked_task_description, :"data-placement" => 'bottom'}
+          %small.popover-description{:"data-title" => task.linked_task_name, :"data-content" => break_lines(task.linked_task_description), :"data-placement" => 'bottom'}
             = link_to "##{task.linked_task}", project_task_path(@project, task.linked_task)
           %i.icon-arrow-left
         = link_to task.name.capitalize, project_task_path(@project, task)

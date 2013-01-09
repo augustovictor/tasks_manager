@@ -32,7 +32,8 @@ class UsersController < ApplicationController
   private
 
   def get_user
-    @user = User.find(params[:id])
+    @user = current_user if params[:id].nil?
+    @user = User.find(params[:id]) unless params[:id].nil?
   end
 
 end
