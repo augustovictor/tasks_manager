@@ -14,7 +14,7 @@ TasksManager::Application.configure do
   config.action_controller.perform_caching = false
 
   #set delivery email method to :smtp, :sendmail or :test
-  config.action_mailer.deliver_method = :smtp
+  # config.action_mailer.deliver_method = :smtp
 
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
